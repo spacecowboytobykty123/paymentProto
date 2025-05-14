@@ -44,7 +44,7 @@ message CreateSubscriptionResponse {
 }
 
 message CancelSubscriptionRequest {
-  int64 sub_id = 1;
+  string sub_stripe_id = 1;
 }
 
 message CancelSubscriptionResponse {
@@ -52,7 +52,7 @@ message CancelSubscriptionResponse {
 }
 
 message GetSubscriptionRequest {
-  int64 sub_id = 1;
+  string sub_stripe_id = 1;
 }
 
 message Subscription {

@@ -257,7 +257,7 @@ func (x *CreateSubscriptionResponse) GetStatus() Status {
 
 type CancelSubscriptionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubId         int64                  `protobuf:"varint,1,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	SubStripeId   string                 `protobuf:"bytes,1,opt,name=sub_stripe_id,json=subStripeId,proto3" json:"sub_stripe_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -292,11 +292,11 @@ func (*CancelSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CancelSubscriptionRequest) GetSubId() int64 {
+func (x *CancelSubscriptionRequest) GetSubStripeId() string {
 	if x != nil {
-		return x.SubId
+		return x.SubStripeId
 	}
-	return 0
+	return ""
 }
 
 type CancelSubscriptionResponse struct {
@@ -345,7 +345,7 @@ func (x *CancelSubscriptionResponse) GetStatus() Status {
 
 type GetSubscriptionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubId         int64                  `protobuf:"varint,1,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	SubStripeId   string                 `protobuf:"bytes,1,opt,name=sub_stripe_id,json=subStripeId,proto3" json:"sub_stripe_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -380,11 +380,11 @@ func (*GetSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetSubscriptionRequest) GetSubId() int64 {
+func (x *GetSubscriptionRequest) GetSubStripeId() string {
 	if x != nil {
-		return x.SubId
+		return x.SubStripeId
 	}
-	return 0
+	return ""
 }
 
 type Subscription struct {
@@ -646,13 +646,13 @@ const file_payment_payment_proto_rawDesc = "" +
 	"\x1aCreateSubscriptionResponse\x12\"\n" +
 	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\x12\x15\n" +
 	"\x06sub_id\x18\x02 \x01(\x03R\x05subId\x12'\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x0f.payment.StatusR\x06status\"2\n" +
-	"\x19CancelSubscriptionRequest\x12\x15\n" +
-	"\x06sub_id\x18\x01 \x01(\x03R\x05subId\"E\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x0f.payment.StatusR\x06status\"?\n" +
+	"\x19CancelSubscriptionRequest\x12\"\n" +
+	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\"E\n" +
 	"\x1aCancelSubscriptionResponse\x12'\n" +
-	"\x06status\x18\x01 \x01(\x0e2\x0f.payment.StatusR\x06status\"/\n" +
-	"\x16GetSubscriptionRequest\x12\x15\n" +
-	"\x06sub_id\x18\x01 \x01(\x03R\x05subId\"\xd0\x01\n" +
+	"\x06status\x18\x01 \x01(\x0e2\x0f.payment.StatusR\x06status\"<\n" +
+	"\x16GetSubscriptionRequest\x12\"\n" +
+	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\"\xd0\x01\n" +
 	"\fSubscription\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\aplan_id\x18\x02 \x01(\x05R\x06planId\x124\n" +
