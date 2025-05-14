@@ -145,9 +145,8 @@ func (SubscriptionStatus) EnumDescriptor() ([]byte, []int) {
 
 type CreateSubscriptionRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	UserId          string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PlanId          string                 `protobuf:"bytes,2,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
-	PaymentMethodId string                 `protobuf:"bytes,3,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PlanId          int32                  `protobuf:"varint,1,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
+	PaymentMethodId string                 `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -182,18 +181,11 @@ func (*CreateSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateSubscriptionRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-func (x *CreateSubscriptionRequest) GetPlanId() string {
+func (x *CreateSubscriptionRequest) GetPlanId() int32 {
 	if x != nil {
 		return x.PlanId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateSubscriptionRequest) GetPaymentMethodId() string {
@@ -205,8 +197,9 @@ func (x *CreateSubscriptionRequest) GetPaymentMethodId() string {
 
 type CreateSubscriptionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubId         string                 `protobuf:"bytes,1,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
-	Status        Status                 `protobuf:"varint,2,opt,name=status,proto3,enum=payment.Status" json:"status,omitempty"`
+	SubStripeId   string                 `protobuf:"bytes,1,opt,name=sub_stripe_id,json=subStripeId,proto3" json:"sub_stripe_id,omitempty"`
+	SubId         int64                  `protobuf:"varint,2,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	Status        Status                 `protobuf:"varint,3,opt,name=status,proto3,enum=payment.Status" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -241,11 +234,18 @@ func (*CreateSubscriptionResponse) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateSubscriptionResponse) GetSubId() string {
+func (x *CreateSubscriptionResponse) GetSubStripeId() string {
+	if x != nil {
+		return x.SubStripeId
+	}
+	return ""
+}
+
+func (x *CreateSubscriptionResponse) GetSubId() int64 {
 	if x != nil {
 		return x.SubId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateSubscriptionResponse) GetStatus() Status {
@@ -256,10 +256,10 @@ func (x *CreateSubscriptionResponse) GetStatus() Status {
 }
 
 type CancelSubscriptionRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SubId         int64                  `protobuf:"varint,1,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CancelSubscriptionRequest) Reset() {
@@ -292,11 +292,11 @@ func (*CancelSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CancelSubscriptionRequest) GetSubscriptionId() string {
+func (x *CancelSubscriptionRequest) GetSubId() int64 {
 	if x != nil {
-		return x.SubscriptionId
+		return x.SubId
 	}
-	return ""
+	return 0
 }
 
 type CancelSubscriptionResponse struct {
@@ -344,10 +344,10 @@ func (x *CancelSubscriptionResponse) GetStatus() Status {
 }
 
 type GetSubscriptionRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SubId         int64                  `protobuf:"varint,1,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetSubscriptionRequest) Reset() {
@@ -380,21 +380,22 @@ func (*GetSubscriptionRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetSubscriptionRequest) GetSubscriptionId() string {
+func (x *GetSubscriptionRequest) GetSubId() int64 {
 	if x != nil {
-		return x.SubscriptionId
+		return x.SubId
 	}
-	return ""
+	return 0
 }
 
 type Subscription struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	PlanId           string                 `protobuf:"bytes,2,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
-	Status           SubscriptionStatus     `protobuf:"varint,3,opt,name=status,proto3,enum=payment.SubscriptionStatus" json:"status,omitempty"`
-	CurrentPeriodEnd int64                  `protobuf:"varint,4,opt,name=current_period_end,json=currentPeriodEnd,proto3" json:"current_period_end,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	PlanId               int32                  `protobuf:"varint,2,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
+	StripeSubscriptionId string                 `protobuf:"bytes,3,opt,name=stripe_subscription_id,json=stripeSubscriptionId,proto3" json:"stripe_subscription_id,omitempty"`
+	Status               SubscriptionStatus     `protobuf:"varint,4,opt,name=status,proto3,enum=payment.SubscriptionStatus" json:"status,omitempty"`
+	CurrentPeriodEnd     int64                  `protobuf:"varint,5,opt,name=current_period_end,json=currentPeriodEnd,proto3" json:"current_period_end,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Subscription) Reset() {
@@ -427,16 +428,23 @@ func (*Subscription) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *Subscription) GetId() string {
+func (x *Subscription) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
-func (x *Subscription) GetPlanId() string {
+func (x *Subscription) GetPlanId() int32 {
 	if x != nil {
 		return x.PlanId
+	}
+	return 0
+}
+
+func (x *Subscription) GetStripeSubscriptionId() string {
+	if x != nil {
+		return x.StripeSubscriptionId
 	}
 	return ""
 }
@@ -501,7 +509,7 @@ func (x *GetSubscriptionResponse) GetSubscription() *Subscription {
 
 type PurchaseToyRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	ToyId           string                 `protobuf:"bytes,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
+	ToyId           int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
 	AmountCents     int64                  `protobuf:"varint,2,opt,name=amount_cents,json=amountCents,proto3" json:"amount_cents,omitempty"`
 	Currency        string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	PaymentMethodId string                 `protobuf:"bytes,4,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
@@ -539,11 +547,11 @@ func (*PurchaseToyRequest) Descriptor() ([]byte, []int) {
 	return file_payment_payment_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *PurchaseToyRequest) GetToyId() string {
+func (x *PurchaseToyRequest) GetToyId() int64 {
 	if x != nil {
 		return x.ToyId
 	}
-	return ""
+	return 0
 }
 
 func (x *PurchaseToyRequest) GetAmountCents() int64 {
@@ -571,6 +579,7 @@ type PurchaseToyResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	PaymentIntentId string                 `protobuf:"bytes,1,opt,name=payment_intent_id,json=paymentIntentId,proto3" json:"payment_intent_id,omitempty"`
 	Status          Status                 `protobuf:"varint,2,opt,name=status,proto3,enum=payment.Status" json:"status,omitempty"`
+	ReceiptUrl      string                 `protobuf:"bytes,3,opt,name=receipt_url,json=receiptUrl,proto3" json:"receipt_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -619,39 +628,49 @@ func (x *PurchaseToyResponse) GetStatus() Status {
 	return Status_STATUS_OK
 }
 
+func (x *PurchaseToyResponse) GetReceiptUrl() string {
+	if x != nil {
+		return x.ReceiptUrl
+	}
+	return ""
+}
+
 var File_payment_payment_proto protoreflect.FileDescriptor
 
 const file_payment_payment_proto_rawDesc = "" +
 	"\n" +
-	"\x15payment/payment.proto\x12\apayment\"y\n" +
+	"\x15payment/payment.proto\x12\apayment\"`\n" +
 	"\x19CreateSubscriptionRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
-	"\aplan_id\x18\x02 \x01(\tR\x06planId\x12*\n" +
-	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\"\\\n" +
-	"\x1aCreateSubscriptionResponse\x12\x15\n" +
-	"\x06sub_id\x18\x01 \x01(\tR\x05subId\x12'\n" +
-	"\x06status\x18\x02 \x01(\x0e2\x0f.payment.StatusR\x06status\"D\n" +
-	"\x19CancelSubscriptionRequest\x12'\n" +
-	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\"E\n" +
+	"\aplan_id\x18\x01 \x01(\x05R\x06planId\x12*\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\"\x80\x01\n" +
+	"\x1aCreateSubscriptionResponse\x12\"\n" +
+	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\x12\x15\n" +
+	"\x06sub_id\x18\x02 \x01(\x03R\x05subId\x12'\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x0f.payment.StatusR\x06status\"2\n" +
+	"\x19CancelSubscriptionRequest\x12\x15\n" +
+	"\x06sub_id\x18\x01 \x01(\x03R\x05subId\"E\n" +
 	"\x1aCancelSubscriptionResponse\x12'\n" +
-	"\x06status\x18\x01 \x01(\x0e2\x0f.payment.StatusR\x06status\"A\n" +
-	"\x16GetSubscriptionRequest\x12'\n" +
-	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\"\x9a\x01\n" +
+	"\x06status\x18\x01 \x01(\x0e2\x0f.payment.StatusR\x06status\"/\n" +
+	"\x16GetSubscriptionRequest\x12\x15\n" +
+	"\x06sub_id\x18\x01 \x01(\x03R\x05subId\"\xd0\x01\n" +
 	"\fSubscription\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\aplan_id\x18\x02 \x01(\tR\x06planId\x123\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x1b.payment.SubscriptionStatusR\x06status\x12,\n" +
-	"\x12current_period_end\x18\x04 \x01(\x03R\x10currentPeriodEnd\"T\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
+	"\aplan_id\x18\x02 \x01(\x05R\x06planId\x124\n" +
+	"\x16stripe_subscription_id\x18\x03 \x01(\tR\x14stripeSubscriptionId\x123\n" +
+	"\x06status\x18\x04 \x01(\x0e2\x1b.payment.SubscriptionStatusR\x06status\x12,\n" +
+	"\x12current_period_end\x18\x05 \x01(\x03R\x10currentPeriodEnd\"T\n" +
 	"\x17GetSubscriptionResponse\x129\n" +
 	"\fsubscription\x18\x01 \x01(\v2\x15.payment.SubscriptionR\fsubscription\"\x96\x01\n" +
 	"\x12PurchaseToyRequest\x12\x15\n" +
-	"\x06toy_id\x18\x01 \x01(\tR\x05toyId\x12!\n" +
+	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12!\n" +
 	"\famount_cents\x18\x02 \x01(\x03R\vamountCents\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12*\n" +
-	"\x11payment_method_id\x18\x04 \x01(\tR\x0fpaymentMethodId\"j\n" +
+	"\x11payment_method_id\x18\x04 \x01(\tR\x0fpaymentMethodId\"\x8b\x01\n" +
 	"\x13PurchaseToyResponse\x12*\n" +
 	"\x11payment_intent_id\x18\x01 \x01(\tR\x0fpaymentIntentId\x12'\n" +
-	"\x06status\x18\x02 \x01(\x0e2\x0f.payment.StatusR\x06status*\xa6\x01\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x0f.payment.StatusR\x06status\x12\x1f\n" +
+	"\vreceipt_url\x18\x03 \x01(\tR\n" +
+	"receiptUrl*\xa6\x01\n" +
 	"\x06Status\x12\r\n" +
 	"\tSTATUS_OK\x10\x00\x12\x17\n" +
 	"\x13STATUS_INVALID_PLAN\x10\x01\x12\x17\n" +
