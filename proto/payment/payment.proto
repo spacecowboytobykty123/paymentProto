@@ -39,8 +39,7 @@ message CreateSubscriptionRequest {
 
 message CreateSubscriptionResponse {
   string sub_stripe_id = 1;
-  int64 sub_id = 2;
-  Status status = 3;
+  Status status = 2;
 }
 
 message CancelSubscriptionRequest {

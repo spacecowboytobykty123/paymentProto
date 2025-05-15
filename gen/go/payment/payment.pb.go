@@ -198,8 +198,7 @@ func (x *CreateSubscriptionRequest) GetPaymentMethodId() string {
 type CreateSubscriptionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SubStripeId   string                 `protobuf:"bytes,1,opt,name=sub_stripe_id,json=subStripeId,proto3" json:"sub_stripe_id,omitempty"`
-	SubId         int64                  `protobuf:"varint,2,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
-	Status        Status                 `protobuf:"varint,3,opt,name=status,proto3,enum=payment.Status" json:"status,omitempty"`
+	Status        Status                 `protobuf:"varint,2,opt,name=status,proto3,enum=payment.Status" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -239,13 +238,6 @@ func (x *CreateSubscriptionResponse) GetSubStripeId() string {
 		return x.SubStripeId
 	}
 	return ""
-}
-
-func (x *CreateSubscriptionResponse) GetSubId() int64 {
-	if x != nil {
-		return x.SubId
-	}
-	return 0
 }
 
 func (x *CreateSubscriptionResponse) GetStatus() Status {
@@ -642,11 +634,10 @@ const file_payment_payment_proto_rawDesc = "" +
 	"\x15payment/payment.proto\x12\apayment\"`\n" +
 	"\x19CreateSubscriptionRequest\x12\x17\n" +
 	"\aplan_id\x18\x01 \x01(\x05R\x06planId\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\"\x80\x01\n" +
+	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\"i\n" +
 	"\x1aCreateSubscriptionResponse\x12\"\n" +
-	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\x12\x15\n" +
-	"\x06sub_id\x18\x02 \x01(\x03R\x05subId\x12'\n" +
-	"\x06status\x18\x03 \x01(\x0e2\x0f.payment.StatusR\x06status\"?\n" +
+	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\x12'\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x0f.payment.StatusR\x06status\"?\n" +
 	"\x19CancelSubscriptionRequest\x12\"\n" +
 	"\rsub_stripe_id\x18\x01 \x01(\tR\vsubStripeId\"E\n" +
 	"\x1aCancelSubscriptionResponse\x12'\n" +
